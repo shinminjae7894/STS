@@ -1,0 +1,84 @@
+package com.mysite.member1;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Collection;
+import java.util.Scanner;
+
+import com.mysite.member1.model.Member;
+import com.mysite.member1.model.RegisterRequest;
+import com.mysite.member1.repository.MemberDao;
+import com.mysite.member1.service.ChangePasswordService;
+import com.mysite.member1.service.MemberRegisterService;
+
+/*
+ * exit
+ * new 이메일 이름 암호 암호확인
+ * change 이메일 현재암호 바꿀암호
+ * list
+ * info 이메일
+ */
+
+public class App {
+	//static MemberRegisterService regSvc = new MemberRegisterService();
+    //static ChangePasswordService changePwdSvc = new ChangePasswordService();
+	private Factory factory = Factory.newInstance();
+
+    public static void main( String[] args ) throws IOException {
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        App app = new App();
+        
+        
+		while (true) {
+			System.out.println("명령어를 입력하세요 : ");
+			String command = br.readLine();
+
+			if (command.equalsIgnoreCase("exit")) {
+				System.out.println("프로그램을 종료합니다");
+				break;
+			} 
+			else if (command.startsWith("new ")) {
+				// 회원 가입
+				app.newCommand(command.split(" "));
+			} 
+			else if (command.startsWith("change")) {
+				// 회원 정보(암호) 수정
+				
+				app.changeCommand(command.split(" "));
+			}
+			else if(command.equalsIgnoreCase("list")) {
+				//전체 회원 정보 조회
+				app.listCommand();
+				}
+				
+			} //end if
+		} // end while
+   
+    
+    public void newCommand(String[] commands) {//static안에서는 static만 사용가능 static사용 x
+		RegisterRequest req = new RegisterRequest();
+		req.setEmail(commands[1]);
+		req.setName(commands[2]);
+		req.setPassword(commands[3]);
+		req.setPasswordConfirm(commands[4]);
+		
+		MemberRegisterService regSvc = factory.getMemberRegisterService();
+		regSvc.register(req);
+    }
+    public void changeCommand(String[] commands) {
+    	factory.getChangePasswordService().changePassword(commands[1], commands[2], commands[3]);
+		System.out.println("암호를 변경하였습니다.");
+    }
+    public void listCommand() {
+    	
+    	MemberRegisterService regSvc = factory.getMemberRegisterService();
+    	Collection<Member> member = regSvc.selectAll();
+		for(Member mem : member) {
+			System.out.println(mem.getId() + "\t" + mem.getName() +"\t" +
+					mem.getEmail() + "\t" + mem.getRegisterDate() + 
+					mem.getPassword());
+		}
+    }
+ }

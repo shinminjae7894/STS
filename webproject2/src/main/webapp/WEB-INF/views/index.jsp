@@ -6,11 +6,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Hello world</h2>
+	<h2>Hello World</h2>
 	
 	<ul>
 		<li><a href="/webproject2/first">first.jsp로 이동</a></li>
-		<li><a href="/webproject2/second?p1=applepie&p2=grapejuice">second.jsp로 이동</a></li>
+		<li><a href="/webproject2/second?p1=apple&p2=grape">second.jsp로 이동</a></li>
 	</ul>
 	<br><br>
 	<form method="post" action="/webproject2/third">
@@ -28,5 +28,17 @@
 		<input type="checkbox" name="chk" value="yes" />동의 여부<br>
 		<input type="submit" value="전송" /><br>
 	</form>
+	<br><br>
+	<a href="/webproject2/fifth">다섯번째 요청</a>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

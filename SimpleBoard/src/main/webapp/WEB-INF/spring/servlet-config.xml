@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc 
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	
+	<annotation-driven />	<!-- annotation을 쓸 수 있게 준비 해줌 -->
+	<context:component-scan base-package="com.mysite" /> <!-- scan해줌 -->
+	
+	<!-- Frontend Resources -->
+	<resources location="/resources/" mapping="/**"></resources>
+	
+	
+	<!-- view Resolver -->
+	<!-- 
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+		
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+	</bean>
+	 -->
+	 
+	 <view-resolvers>
+	 	<jsp prefix="/WEB-INF/views/" />
+	 	<jsp suffix=".jsp" />
+	 </view-resolvers>
+	 
+	 <view-controller path="/" view-name="/index" />
+</beans:beans>
+
+
+
+
+
+
+
+
+

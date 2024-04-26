@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc 
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+	<!-- Handler Mapping -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean>
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<!-- <prop key="/">indexController</prop> -->
+				<prop key="/first">firstController</prop>
+				<prop key="/second">secondController</prop>
+				<prop key="/third">thirdController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- <bean id="indexController" class="controller.IndexController"></bean> -->
+	<bean id="firstController" class="controller.FirstController"></bean>
+	<bean id="secondController" class="controller.SecondController"></bean>
+	<bean id="thirdController" class="controller.ThirdController"></bean>
+
+
+	<bean
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"></bean>
+	<!-- <bean name="/" class="controller.IndexController"></bean> -->
+	<bean name="/first" class="controller.FirstController"></bean>
+	<bean name="/second" class="controller.SecondController"></bean>
+	<bean name="/third" class="controller.ThirdController"></bean>
+
+	
+</beans>
+
+
+
+
+
+
+
+
+

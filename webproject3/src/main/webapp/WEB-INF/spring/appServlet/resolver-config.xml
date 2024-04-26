@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc 
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- View Resolver -->
+	<!-- InternalResourceViewResolver는 해결 못할 시 끝내버림 실행 순서를 바꿔줘야함 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+		
+		<property name="prefix">
+			<value>/WEB-INF/views/</value>
+		</property>
+		
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.InternalResourceView</value>
+		</property>
+		
+		<property name="order" value="1"></property>
+		<!-- 순서변경 -->
+	</bean>
+	
+	<!-- Bundle이 들어가면 파일과 연관됨, 별도의 파일을 따로 만들어서 불러다 설정함 -->
+	<bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<property name="basename" value="bundleview"></property>
+		<property name="order" value="0"></property>
+	</bean>
+</beans>
+
+
+
+
+
+
+
+
+

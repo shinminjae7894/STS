@@ -7,11 +7,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
 public class FirstController implements Controller{
-
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		return new ModelAndView("/WEB-INF/views/index.jsp");
 	}
-
 }

@@ -1,0 +1,124 @@
+Web Programing (chcp 65001 : UTF-8로 바꿔줌)  WEB-INF :  백엔드 정보 
+-----------------------------------------------
+1.  준비 사항
+		(1) 웹서버
+				- Apache, Nginx, IIS, Tomcat, ...
+				- JBcos, Websphere, Weblogic, Jeus, ...
+				-----------------------------------------------
+				- https://tomcat.apache.org
+
+		(2) 웹 프로젝트
+				프로젝트 폴더
+					html파일
+					WEB-INF (폴더생성,이름바뀌면안됨)
+							classes
+							lib
+							web.xml : 프로젝트의 환경설정을 도와줌(선택,예전엔 필수)
+
+		(3) 내가 만든 웹프로젝트를 톰캣을 통해 실행
+				1) Tomcat 설치폴더의 webapps폴더에 프로젝트를 올려놓는다. (http://127.0.0.1:8080/web01/index.html 가상경로															   =http://localhost:8080/web01/index.html)
+				2) Tomcat 폴더의 conf폴더에 있는 server.xml에 프로젝트 위치 등록
+			가상 경로	<Context 	path="/web" (외부에서 접근하기 위한 가상경로)
+						docBase="C:\Users\acorn\OneDrive\바탕 화면\BackEnd\JspWork\Manual\web01" 
+						(실제 프로젝트 작업 경로)
+						workDir="C:\Users\acorn\OneDrive\바탕 화면\BackEnd\JspWork\Manual\web01\work"/>
+						(실제 프로젝트 작업 경로\work)
+
+2. 서블릿(Servlet) : 사용자가 접속했을 때 실행
+		https://javaee.github.io/javaee-spec/javadocs/javax/servlet/package-summary.html
+
+(1) 특징
+		1) 자바로 만든 Application(웹 서버에서만 실행)
+		2) 클라이언트와 소통(요청(Request) 응답(Response)) : 서블릿의 목적
+		3) JavaEE 스펙이 필요, 별도의 라이브러리가 필요 : servlet-api.jar	
+		4) javax.servlet.http.HttpServlet을 상속받아 작성
+		(javax : jaxaextends ,java확장) 
+		-servlet method : init(), destroy(), service() 중요 Generic Servlet
+
+(2) 서블릿을 구성하는 3대 클래스
+		1) HttpServlet > GenericServlet
+		2) HttpServletRequest > ServletRequest (요청을 처리하는 클래스)
+		3) HttpServletResponse > ServletResponse (응답을 처리하는 클래스)
+
+(3) 요청(Request) 방식
+		1) GET (data를 header에 담아서 보냄)
+				-기본 전송 방식
+				-전송방법이 다양
+				-소량의 데이터를 전송(4kByte)
+				-전송되는 데이터가 노출
+				-하이퍼링크 전송방식,URL전송 방식(직접주소를입력)
+				-조회 목적
+				
+		2) POST (error 메세지 : 4-: 사용자가 잘못, 5-:클라이언트 잘못 , data를 바디에 담아서 보냄,조각(패킷)으로 나눠서 보냄)
+				-전송방법이 단 한가지(form말고 절대 없음)
+				-대량의 데이터를 전송
+				-전송되는 데이터가 노출되지 않는다.(Get방식보단 보안이 나음)
+				-폼 전송방식
+				-데이터를 변경하기 위한 목적
+
+		3) 데이터를 꺼내오는 메서드 : HttpServletRequest
+				String  getParameter(String name) : 하나의 값만 리턴
+				String[]  getParameterValues(String name) : 배열 값을 리턴
+				위에 두개 많이씀,직접 값을 꺼내옴
+				Enumeration<String>  getParameterNames() : 변수의 이름을 가져옴,변수가 많을 때 사용
+
+(4) LifeCycle
+		1) init() : 생성자와 동일한 역할을 하는 메서드 ,서블릿이 생성되었을때
+				-최초의 사용자가 접속시 서블릿 객체가 생성되고  init()는 단 한번만 호출. 
+				(서블릿은 Singleton : 한번만 호출, 재접속시 재호출 x)
+		2) service() : 서블릿이 일을 하고 있는 동안
+				-사용자에 의해 요청이 들어올때마다 호출된다.
+				-doXXX()를 호출(어떤방식이든 호출)
+		3) destroy() : 서블릿이 소멸 될때
+				-서버가 종료될 때 단 한번만 호출
+		
+(5) Header 정보 확인
+
+(6) 웹프로그래밍에서 중요한 기술 2가지
+		1) 페이지 이동 기술
+				-HTML
+					<a href=""></a>
+					<meta></meta>(몇초 후 에 이동할 수 있게 예약 걸어둠)
+				-Javascript
+					location.href="페이지"
+					history.back()
+				-Java
+					HttpServletResponse(응답을 하기위한 객체)
+			
+		2) Data Persistence(데이터 영속성,지속성)
+				(웹이라는 환경에서 데이터를 지속할 수 있게 도와주는 기술)
+				-Cookie : 사용자 컴퓨터의 흔적을 남겨놓음,클라이언트(보조기억장치)에 서버가 필요한 데이터를 저장시키는 기술
+					-4KB(최대)
+					-Text
+					-유효기간
+				-Session : 서버(주기억장치)의 메모리에 저장,속도가 빠름,편함,사용자가 사용 안할땐 삭제,완전히 독립된공간(자동					      으로 만들어주는 공간),cookie없이는 쓸 수 없음
+
+(7) 기본문서(파일명을 지정하지 않아도 실행할 수 있는 문서) 지정과 최상위 URL에서 실행
+				1) web.xml에서 <welcome-file-list>에서 기본 문서 지정
+				2) 최상위 URL에서 실행
+					-server.xml에서 path를 공란으로 만든다.
+					-프로젝트에서 마우스 오른쪽 버튼 -> propeties -> web project setting -> Context Root를 공란
+
+3. JSP
+		-html 안에 java코드를 포함시키는 형태, servlet과 반대
+		-확장자는 반드시 .jsp로 저장
+
+(1) ScriptElement
+		1) <%...%> : Scriptlet (처리부)
+		2)<%=...%> : Expression (표현부)
+		3)<%!...%> : Declaration (선언부)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

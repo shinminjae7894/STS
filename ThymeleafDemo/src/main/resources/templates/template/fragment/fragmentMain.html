@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>fragmentMain</h1>
+	
+	<h2>부분 포함</h2>
+	
+	<h3> Insert 방식 </h3>
+	<div th:insert="~{template/fragment/footer :: copy1}"></div><!-- 기존의 내용에 추가됨 -->
+	<div th:insert="template/fragment/footer :: copy2"></div> <!-- ::로 구분가능 -->
+	
+	<h3> Replace 방식 </h3>
+	<div th:replace="~{template/fragment/footer :: copy1}"></div><!-- 기존의 내용을 지우고 추가함, div태그를 없애고 그자리에 footer태그 삽입 -->
+	
+	<hr>
+	
+	<h3>파라미터 사용</h3>
+	<div th:replace="~{template/fragment/footer :: copyParam('홍길동', '20')}"></div>
+</body>
+</html>

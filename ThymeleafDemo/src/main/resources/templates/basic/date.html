@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>date</h1>
+	
+	degault : [[ ${ localDateTime } ]]
+	
+	<hr/>
+	
+	[[ ${#temporals.format(localDateTime, "yyyy-mm-dd HH:mm:ss")} ]]
+	[[ ${#temporals.format(localDateTime, "yyyy-mm-dd/a HH:mm:ss")} ]]
+	[[ ${#temporals.format(localDateTime, "yyyy-mm-dd HH:mm:ss")} ]]
+	
+	<hr/>
+	
+	[[${#temporals.day(localDateTime)}]]            
+	[[${#temporals.month(localDateTime)}]]          
+	
+	
+</body>
+</html>

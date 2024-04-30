@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<head th:fragment="common_header(title, links)">
+	<title th:replace="${title}">레이아웃 타이틀</title>
+	
+	<th:block th:replace="${links}" />
+	
+	<!-- 공통 -->
+	<link rel ="icon" th:href=@{/images/favicon.ico} type="image/x-icon">
+	<link rel="stylesheet" type="text/css" th:href=@{/css/awesome.css}>
+</head>
+

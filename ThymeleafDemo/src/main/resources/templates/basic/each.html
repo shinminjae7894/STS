@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Each</h1>
+	
+	<table border="1">
+		<tr>
+			<th>이름</th> <th>나이</th>
+		</tr>
+		<tr th:each="user : ${users}">
+			<td th:text="${user.userName}"></td>
+			<td th:text="${user.age}"></td>
+		</tr>
+	</table>
+	
+	<hr>
+	
+	<table border="1">
+		<tr>
+			<th>번호</th> <th>이름</th> <th>나이</th>
+		</tr>
+		<tr th:each="user, uStatus : ${users}" th:object="${user}">
+			<td th:text="${uStatus.count}"></td>
+			<td th:text="*{userName}"></td>
+			<td th:text="*{age}"></td>
+		</tr>
+	</table>
+	
+	<hr>
+	
+	<table border="1">
+		<tr>
+			<th>번호</th> <th>이름</th> <th>나이</th> <th>정보</th>
+		</tr>
+		<tr th:each="user : ${users}" th:object="${user}">
+			<td th:text="${userStat.count}"></td><!-- 이미 만들어진 변수이름의 뒤에는 status의 약자가 붙음 -->
+			<td th:text="*{userName}"></td>
+			<td th:text="*{age}"></td>
+			<td>
+				index = [[${userStat.index}]]<br>
+				size = [[${userStat.size}]]<br>
+				even? = [[${userStat.even}]]<br>
+				odd? = [[${userStat.odd}]]<br>
+				first? = [[${userStat.first}]]<br>
+				last? = [[${userStat.last}]]<br>
+				current? = [[${userStat.current}]]<br>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

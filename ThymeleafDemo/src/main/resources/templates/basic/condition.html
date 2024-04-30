@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Condition</h1>
+	
+	<table border="1">
+		<tr>
+			<th>번호</th> <th>이름</th> <th>나이</th>
+		</tr>
+		<tr th:each="user, uStatus : ${users}" th:object="${user}">
+			<td th:text="${uStatus.count}"></td>
+			<td th:text="*{userName}"></td>
+			<td>
+				<span th:text ="*{age}"></span>
+				<span th:text="'미성년자'" th:if="*{age lt 20}"></span>
+				<span th:text="'미성년자'" th:unless="*{age >= 20}"></span>
+			</td>
+		</tr>
+	</table>
+	
+	<hr>
+	
+	<table border="1">
+		<tr>
+			<th>번호</th> <th>이름</th> <th>나이</th>
+		</tr>
+		<tr th:each="user, uStatus : ${users}" th:object="${user}">
+			<td th:text="${uStatus.count}"></td>
+			<td th:text="*{userName}"></td>
+			<td th:switch="*{age}">
+				<span th:case="10">10살</span>
+				<span th:case="20">20살</span>
+				<span th:case="*">기타</span>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

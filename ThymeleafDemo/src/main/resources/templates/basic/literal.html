@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>literal</h1>
+	
+	<span th:text="'hello world'" ></span><br><!-- text는 변수가 아님 -->
+	<span th:text="'hello world' + 'world'" ></span><br>
+	<span th:text="'hello world' + ${data} +'world' + 100 " ></span><br> <!-- 숫자 출력 ''이거 없이 --> 
+	<span th:text="|hello world  ${data} world 100| " ></span><br> <!-- ||이거 쓰면 ''이거랑 + 이거 안써도 됨 -->
+</body>
+</html>

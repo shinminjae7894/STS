@@ -22,7 +22,6 @@ public class BasicController {
 	@GetMapping("/basic/text-basic")
 	public ModelAndView textBasic(ModelAndView mv) {
 		String data1 = "Hello Spring";
-		
 		mv.addObject(data1, mv);
 		mv.setViewName("/basic/text-basic");
 		return mv;
